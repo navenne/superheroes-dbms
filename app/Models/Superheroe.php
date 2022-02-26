@@ -33,6 +33,11 @@ class Superheroe extends DBAbstractModel
     private $created_at;
     private $updated_at;
 
+    public function setId($id)
+    {
+        $this->id = trim(stripslashes(htmlspecialchars($id)));
+    }
+
     public function setNombre($nombre)
     {
         $this->nombre = trim(stripslashes(htmlspecialchars($nombre)));
@@ -41,6 +46,11 @@ class Superheroe extends DBAbstractModel
     public function setVelocidad($velocidad)
     {
         $this->velocidad = trim(stripslashes(htmlspecialchars($velocidad)));
+    }
+
+    public function getMensaje()
+    {
+        return $this->mensaje;
     }
 
     public function set()
@@ -75,9 +85,11 @@ class Superheroe extends DBAbstractModel
 
     public function edit()
     {
+        $id = $this->id;
         $nombre = $this->nombre;
         $velocidad = $this->velocidad;
         $this->query = "UPDATE superheroes SET nombre = :nombre, velocidad = :velocidad WHERE id = :id";
+        $this->parametros['id'] = $id;
         $this->parametros['nombre'] = $nombre;
         $this->parametros['velocidad'] = $velocidad;
         $this->get_results_from_query();

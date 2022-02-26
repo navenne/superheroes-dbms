@@ -10,12 +10,19 @@
 
 <body>
 
-    <h1>Crear superhéroe</h1>
+    <h1>Editar</h1>
+
+    <h2>Superhéroe</h2>
+    <ul>
+        <li>Id: <?=$data['id']?></li>
+        <li>Nombre: <?=$data['nombre']?></li>
+        <li>Velocidad: <?=$data['velocidad']?></li>
+    </ul>
 
     <form action="" method="post">
         <label>Nombre <input type="text" name="nombre" placeholder="Nombre"></label><span><?=$data['nombreErr']?></span><br><br>
         <label>Velocidad <input type="number" name="velocidad" placeholder="Velocidad"><span><?=$data['velocidadErr']?></span></label><br><br>
-        <input type="submit" name="submit" value="Crear"><br><br>
+        <input type="submit" name="submit" value="Guardar"><br><br>
     </form>
 
 </body>

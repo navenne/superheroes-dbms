@@ -11,14 +11,14 @@
 <body>
 
 <h1>Superhéroes</h1>
-<a href="./superheroes/add">Añadir superhéroe</a><br><br>
+<a href="./superheroes/add">Crear superhéroe</a><br><br>
     
     <?php
 
     foreach ($data as $key => $value) {
         echo $value['nombre'];
-        echo " <a href='./superheroes/del/'" . $value['id'];
-        echo "<a href='update.php?id=" . $value['id'] . "&nombre=" . $value['nombre'] . "'>Edit</a><br>";
+        echo " <a href='./superheroes/del/" . $value['id'] . "'>Del</a> ";
+        echo "<a href='./superheroes/edit/" . $value['id'] . "&nombre=" . $value['nombre'] . "&velocidad=" . $value['velocidad'] . "'>Edit</a><br>";
     }
 
     ?>

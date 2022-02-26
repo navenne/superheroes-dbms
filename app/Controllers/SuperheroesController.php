@@ -39,7 +39,8 @@ class SuperheroesController extends BaseController
                 $sh->setNombre($nombre);
                 $sh->setVelocidad($velocidad);
                 $sh->set();
-                header('Location: /');
+                echo $sh->getMensaje();
+                echo "<br><a href=/>Volver a inicio</a>";
             } else {
                 $this->renderHTML('..\views\superheroes_add_view.php', $data);
             }
@@ -50,10 +51,52 @@ class SuperheroesController extends BaseController
 
     public function editAction()
     {
+        $data = array();
+        $id = $data['id'] = strstr(explode("/", $_SERVER["REQUEST_URI"])[3], '&', true);
+        $data['nombre'] = strstr(explode("=", $_SERVER["REQUEST_URI"])[1], '&', true);
+        $data['velocidad'] = explode("=", $_SERVER["REQUEST_URI"])[2];
+        $nombre = $data['nombreErr'] = $velocidad = $data['velocidadErr'] = "";
+        $processform = false;
 
+        if (isset($_POST["submit"])) {
+            $processform = true;
+            if (empty($_POST["nombre"])) {
+                $data['nombreErr'] = "El nombre es obligatorio";
+                $processform = false;
+            } else {
+                $nombre = stripslashes(htmlspecialchars(trim($_POST["nombre"])));
+            }
+
+            if (empty($_POST["velocidad"])) {
+                $data['velocidadErr'] = "La velocidad es obligatoria";
+                $processform = false;
+            } else {
+                $velocidad = stripslashes(htmlspecialchars(trim($_POST["velocidad"])));
+            }
+
+            if ($processform) {
+                $sh = Superheroe::getInstancia();
+                $sh->setId($id);
+                $sh->setNombre($nombre);
+                $sh->setVelocidad($velocidad);
+                $sh->edit();
+                echo $sh->getMensaje();
+                echo "<br><a href=/>Volver a inicio</a>";
+            } else {
+                $this->renderHTML('..\views\superheroes_edit_view.php', $data);
+            }
+        } else {
+            $this->renderHTML('..\views\superheroes_edit_view.php', $data);
+        }
     }
 
     public function delAction()
     {
+        $id = explode("/", $_SERVER["REQUEST_URI"])[3];
+        $sh = Superheroe::getInstancia();
+        $sh->setId($id);
+        $sh->delete();
+        echo $sh->getMensaje();
+        echo "<br><a href=/>Volver a inicio</a>";
     }
 }

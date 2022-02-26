@@ -24,12 +24,12 @@ $router->add(array(
 ));
 $router->add(array(
     'name' => 'sh_edit',
-    'path' => '/^\/superheroes\/edit\/[1-9][0-9]*$/',
+    'path' => '/^\/superheroes\/edit\/[1-9][0-9]*/',
     'action' => [SuperheroesController::class, 'editAction']
 ));
 $router->add(array(
     'name' => 'sh_del',
-    'path' => '/^\/superheroes\/del\/[1-9][0-9]*$/',
+    'path' => '/^\/superheroes\/del\/[1-9][0-9]*/',
     'action' => [SuperheroesController::class, 'delAction']
 ));
 
