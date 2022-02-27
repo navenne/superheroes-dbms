@@ -29,7 +29,9 @@ class Superheroe extends DBAbstractModel
 
     private $id;
     private $nombre;
-    private $velocidad;
+    private $imagen;
+    private $evolucion;
+    private $idUsuario;
     private $created_at;
     private $updated_at;
 
@@ -41,11 +43,6 @@ class Superheroe extends DBAbstractModel
     public function setNombre($nombre)
     {
         $this->nombre = trim(stripslashes(htmlspecialchars($nombre)));
-    }
-
-    public function setVelocidad($velocidad)
-    {
-        $this->velocidad = trim(stripslashes(htmlspecialchars($velocidad)));
     }
 
     public function getMensaje()

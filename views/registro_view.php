@@ -10,9 +10,7 @@
 
 <body>
 
-    <h1>Registro de ciudadanos</h1>
-
-    <a href="/">Volver a inicio</a><br><br>
+    <h2>Registro de ciudadanos</h2>
 
     <form action="" method="post">
         <label>Nombre <input type="text" name="nombre"></label><br><br>

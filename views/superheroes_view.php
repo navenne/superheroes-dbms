@@ -1,30 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Laura Hidalgo Rivera">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laura Hidalgo Rivera</title>
-</head>
-
-<body>
-
-<h1>Superhéroes</h1>
-
-<a href="./registro">Registrarse</a><br><br>
-
-<a href="./superheroes/list">Ver todos los superhéroes</a><br><br>
-
-    <?php
-
-    foreach ($data as $key => $value) {
-        echo $value['nombre'];
-        echo " <a href='./superheroes/del/" . $value['id'] . "'>Del</a> ";
-        echo "<a href='./superheroes/edit/" . $value['id'] . "&nombre=" . $value['nombre'] . "&velocidad=" . $value['velocidad'] . "'>Edit</a><br>";
-    }
-
-    ?>
-</body>
-
-</html>
+<?php
+foreach ($data as $key => $value) { ?>
+    <p><?=$value['nombre'];?>
+    <a href='./superheroes/del/<?=$value['id']?>'><span class='material-icons'>delete</span></a>
+    <a href='./superheroes/edit/<?=$value['id']?>&nombre=<?=$value['nombre']?>'><span class='material-icons'>edit</span></a>
+    </p>
+<?php
+}
+?>

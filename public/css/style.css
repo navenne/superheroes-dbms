@@ -1,0 +1,51 @@
+body {
+    margin: 0 auto;
+}
+
+header {
+    background-color: rgb(228, 91, 247);
+    display: flex;
+    align-items: baseline;
+    padding: 20px 10px;
+}
+
+h1 {
+    width: 200px;
+    margin: 0;
+}
+
+header > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+p {
+    margin: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+
+h2, .options {
+    padding: 0 20px;
+}
+
+form {
+    padding: 10px 20px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+}
+
+.registro, .login {
+    background-color: white;
+    padding: 10px;
+}
+
+.registro:hover, .login:hover {
+    background-color: wheat;
+}

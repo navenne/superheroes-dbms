@@ -20,7 +20,7 @@ $router->add(array(
 ));
 $router->add(array(
     'name' => 'registro',
-    'path' => '/^\/registro$/',
+    'path' => '/^\/register$/',
     'action' => [AuthController::class, 'registerAction']
 ));
 $router->add(array(
@@ -47,6 +47,7 @@ $router->add(array(
 
 $request = $_SERVER['REQUEST_URI'];
 $route = $router->match($request);
+include("../views/header.php");
 
 if ($route) {
     $controllerName = $route['action'][0];
