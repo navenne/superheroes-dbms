@@ -108,7 +108,7 @@ class SuperheroesController extends BaseController
         $sh = Superheroe::getInstancia();
         $data = $sh->getAll();
 
-        if (isset($_POST["submit"])) {
+        if (isset($_POST["buscarId"])) {
             $processform = true;
             if (empty($_POST["id"])) {
                 $processform = false;
@@ -122,7 +122,23 @@ class SuperheroesController extends BaseController
                 $data = $sh->get();
                 $this->renderHTML('..\views\superheroes_get_view.php', $data);
             } else {
-               $this->renderHTML('..\views\superheroes_list_view.php', $data);
+                $this->renderHTML('..\views\superheroes_list_view.php', $data);
+            }
+        } else if (isset($_POST["buscarNombre"])) {
+            $processform = true;
+            if (empty($_POST["nombre"])) {
+                $processform = false;
+            } else {
+                $nombre = stripslashes(htmlspecialchars(trim($_POST["nombre"])));
+            }
+
+            if ($processform) {
+                $sh = Superheroe::getInstancia();
+                $sh->setNombre($nombre);
+                $data = $sh->search();
+                $this->renderHTML('..\views\superheroes_get_view.php', $data);
+            } else {
+                $this->renderHTML('..\views\superheroes_list_view.php', $data);
             }
         } else {
             $this->renderHTML('..\views\superheroes_list_view.php', $data);

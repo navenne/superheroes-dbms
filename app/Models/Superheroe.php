@@ -112,4 +112,14 @@ class Superheroe extends DBAbstractModel
         $this->mensaje = 'Superhéroes obtenidos correctamente';
         return $this->rows;
     }
+
+    public function search()
+    {
+        $nombre = $this->nombre;
+        $this->query = "SELECT * FROM superheroes WHERE nombre LIKE '%$nombre%'";
+        $this->parametros['nombre'] = $nombre;
+        $this->get_results_from_query();
+        $this->mensaje = 'Superhéroe obtenido correctamente';
+        return $this->rows[0];
+    }
 }

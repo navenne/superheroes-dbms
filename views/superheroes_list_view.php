@@ -13,8 +13,13 @@
 <h1>Superhéroes</h1>
 <a href="/">Volver a inicio</a><br><br>
 <form action="" method="post">
-    <input type="number" placeholder="Buscar por id..." name="id">
-    <input type="submit" name="submit" value="Buscar">
+    <label>Por id <input type="number" placeholder="Buscar por id..." name="id"></label>
+    <input type="submit" name="buscarId" value="Buscar">
+</form>
+<br>
+<form action="" method="post">
+<label>Por nombre <input type="text" placeholder="Buscar por nombre..." name="nombre"></label>
+    <input type="submit" name="buscarNombre" value="Buscar">
 </form>
     
     <?php
@@ -22,7 +27,7 @@
     foreach ($data as $key => $value) {
         echo $value['nombre'];
         echo " <a href='../del/" . $value['id'] . "'>Del</a> ";
-        echo "<a href='../edit/" . $value['id'] . "&nombre=" . $value['nombre'] . "&velocidad=" . $value['velocidad'] . "'>Edit</a><br>";
+        echo "<a href='../edit/" . $value['id'] . "&nombre=" . $value['nombre'] . "'>Edit</a><br>";
     }
 
     ?>
