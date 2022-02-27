@@ -9,6 +9,7 @@ require_once '..\bootstrap.php';
 
 use App\Core\Router;
 use App\Controllers\IndexController;
+use App\Controllers\AuthController;
 use App\Controllers\SuperheroesController;
 
 $router = new Router();
@@ -16,6 +17,11 @@ $router->add(array(
     'name' => 'home',
     'path' => '/^\/$/',
     'action' => [IndexController::class, 'indexAction']
+));
+$router->add(array(
+    'name' => 'registro',
+    'path' => '/^\/registro$/',
+    'action' => [AuthController::class, 'registerAction']
 ));
 $router->add(array(
     'name' => 'sh_add',

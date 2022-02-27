@@ -11,8 +11,10 @@
 <body>
 
 <h1>Superhéroes</h1>
-<a href="./superheroes/add">Crear superhéroe</a><br><br>
-<a href="./superheroes/list">Ver todos</a><br><br>
+
+<a href="./registro">Registrarse</a><br><br>
+
+<a href="./superheroes/list">Ver todos los superhéroes</a><br><br>
 
     <?php
 

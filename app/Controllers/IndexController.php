@@ -1,10 +1,12 @@
 <?php
+
 /**
-* @author Laura Hidalgo Rivera
-* 
-*/
+ * @author Laura Hidalgo Rivera
+ * 
+ */
 
 namespace App\Controllers;
+
 use App\Models\Superheroe;
 
 class IndexController extends BaseController
