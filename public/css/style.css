@@ -35,6 +35,24 @@ form {
     padding: 10px 20px;
 }
 
+.form-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+table td, table th {
+    border-bottom: 1px solid black;
+    border-collapse: collapse;
+}
+
 ul {
     list-style-type: none;
 }

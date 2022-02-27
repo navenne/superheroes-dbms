@@ -1,7 +1,10 @@
 <h2><?= $data['superheroe']['nombre'] ?></h2>
 
+<?= $data['superheroe']['imagen'] ?>
+
 <ul>
     <li>Id: <?= $data['superheroe']['id'] ?></li>
+    <li>Evolución: <?= $data['superheroe']['evolucion']?></li>
     <li>Habilidades:
         <ul>
             <?php
