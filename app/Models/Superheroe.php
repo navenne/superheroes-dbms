@@ -72,7 +72,7 @@ class Superheroe extends DBAbstractModel
         $this->parametros['id'] = $id;
         $this->get_results_from_query();
         $this->mensaje = 'Superhéroe obtenido correctamente';
-        return $this->rows;
+        return $this->rows[0];
     }
 
     public function getAll()

@@ -40,7 +40,8 @@ class SuperheroesController extends BaseController
                 $sh->setVelocidad($velocidad);
                 $sh->set();
                 echo $sh->getMensaje();
-                echo "<br><a href=/>Volver a inicio</a>";
+                echo "<br><a href='/'>Volver a inicio</a><br>";
+                echo "<a href='../list'>Ver todos</a>";
             } else {
                 $this->renderHTML('..\views\superheroes_add_view.php', $data);
             }
@@ -53,7 +54,7 @@ class SuperheroesController extends BaseController
     {
         $data = array();
         $id = $data['id'] = strstr(explode("/", $_SERVER["REQUEST_URI"])[3], '&', true);
-        $data['nombre'] = strstr(explode("=", $_SERVER["REQUEST_URI"])[1], '&', true);
+        $data['nombre'] = str_replace('%20', ' ', strstr(explode("=", $_SERVER["REQUEST_URI"])[1], '&', true));
         $data['velocidad'] = explode("=", $_SERVER["REQUEST_URI"])[2];
         $nombre = $data['nombreErr'] = $velocidad = $data['velocidadErr'] = "";
         $processform = false;
@@ -81,7 +82,8 @@ class SuperheroesController extends BaseController
                 $sh->setVelocidad($velocidad);
                 $sh->edit();
                 echo $sh->getMensaje();
-                echo "<br><a href=/>Volver a inicio</a>";
+                echo "<br><a href='/'>Volver a inicio</a><br>";
+                echo "<a href='../list'>Ver todos</a>";
             } else {
                 $this->renderHTML('..\views\superheroes_edit_view.php', $data);
             }
@@ -97,6 +99,33 @@ class SuperheroesController extends BaseController
         $sh->setId($id);
         $sh->delete();
         echo $sh->getMensaje();
-        echo "<br><a href=/>Volver a inicio</a>";
+        echo "<br><a href='/'>Volver a inicio</a><br>";
+        echo "<a href='../list'>Ver todos</a>";
+    }
+
+    public function listAction()
+    {
+        $sh = Superheroe::getInstancia();
+        $data = $sh->getAll();
+
+        if (isset($_POST["submit"])) {
+            $processform = true;
+            if (empty($_POST["id"])) {
+                $processform = false;
+            } else {
+                $id = stripslashes(htmlspecialchars(trim($_POST["id"])));
+            }
+
+            if ($processform) {
+                $sh = Superheroe::getInstancia();
+                $sh->setId($id);
+                $data = $sh->get();
+                $this->renderHTML('..\views\superheroes_get_view.php', $data);
+            } else {
+               $this->renderHTML('..\views\superheroes_list_view.php', $data);
+            }
+        } else {
+            $this->renderHTML('..\views\superheroes_list_view.php', $data);
+        }
     }
 }

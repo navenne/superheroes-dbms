@@ -33,6 +33,12 @@ $router->add(array(
     'action' => [SuperheroesController::class, 'delAction']
 ));
 
+$router->add(array(
+    'name' => 'sh_list',
+    'path' => '/^\/superheroes\/list$/',
+    'action' => [SuperheroesController::class, 'listAction']
+));
+
 $request = $_SERVER['REQUEST_URI'];
 $route = $router->match($request);
 

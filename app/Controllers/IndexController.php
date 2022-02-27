@@ -12,7 +12,7 @@ class IndexController extends BaseController
     public function indexAction()
     {
         $sh = Superheroe::getInstancia();
-        $data = $sh->getLast(5);
+        $data = $sh->getLast(15);
         $this->renderHTML('..\views\superheroes_view.php', $data);
     }
 }

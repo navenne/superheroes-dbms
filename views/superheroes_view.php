@@ -12,7 +12,8 @@
 
 <h1>Superhéroes</h1>
 <a href="./superheroes/add">Crear superhéroe</a><br><br>
-    
+<a href="./superheroes/list">Ver todos</a><br><br>
+
     <?php
 
     foreach ($data as $key => $value) {
