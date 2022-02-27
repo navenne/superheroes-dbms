@@ -37,12 +37,27 @@ class Superheroe extends DBAbstractModel
 
     public function setId($id)
     {
-        $this->id = trim(stripslashes(htmlspecialchars($id)));
+        $this->id = $id;
     }
 
     public function setNombre($nombre)
     {
-        $this->nombre = trim(stripslashes(htmlspecialchars($nombre)));
+        $this->nombre = $nombre;
+    }
+
+    public function setImagen($imagen)
+    {
+        $this->imagen = $imagen;
+    }
+
+    public function setEvolucion($evolucion)
+    {
+        $this->evolucion = $evolucion;
+    }
+
+    public function setIdUsuario($idUsuario)
+    {
+        $this->idUsuario = $idUsuario;
     }
 
     public function getMensaje()
@@ -53,11 +68,15 @@ class Superheroe extends DBAbstractModel
     public function set()
     {
         $nombre = $this->nombre;
-        $velocidad = $this->velocidad;
-        $this->query = "INSERT INTO superheroes(nombre, velocidad)
-                        VALUES(:nombre, :velocidad)";
+        $imagen = $this->imagen;
+        $evolucion = $this->evolucion;
+        $idUsuario = $this->idUsuario;
+        $this->query = "INSERT INTO superheroes(nombre, imagen, evolucion, idUsuario)
+                        VALUES(:nombre, :imagen, :evolucion, :idUsuario)";
         $this->parametros['nombre'] = $nombre;
-        $this->parametros['velocidad'] = $velocidad;
+        $this->parametros['imagen'] = $imagen;
+        $this->parametros['evolucion'] = $evolucion;
+        $this->parametros['idUsuario'] = $idUsuario;
         $this->get_results_from_query();
         $this->mensaje = 'Superhéroe agregado correctamente';
     }
@@ -84,11 +103,15 @@ class Superheroe extends DBAbstractModel
     {
         $id = $this->id;
         $nombre = $this->nombre;
-        $velocidad = $this->velocidad;
-        $this->query = "UPDATE superheroes SET nombre = :nombre, velocidad = :velocidad WHERE id = :id";
+        $imagen = $this->imagen;
+        $evolucion = $this->evolucion;
+        $idUsuario = $this->idUsuario;
+        $this->query = "UPDATE superheroes SET nombre = :nombre, imagen = :imagen, evolucion = :evolucion, idUsuario = :idUsuario WHERE id = :id";
         $this->parametros['id'] = $id;
         $this->parametros['nombre'] = $nombre;
-        $this->parametros['velocidad'] = $velocidad;
+        $this->parametros['imagen'] = $imagen;
+        $this->parametros['evolucion'] = $evolucion;
+        $this->parametros['idUsuario'] = $idUsuario;
         $this->get_results_from_query();
         $this->mensaje = 'Superhéroe editado correctamente';
     }
@@ -118,5 +141,15 @@ class Superheroe extends DBAbstractModel
         $this->get_results_from_query();
         $this->mensaje = 'Superhéroe obtenido correctamente';
         return $this->rows[0];
+    }
+
+    public function getHabilidades()
+    {
+        $id = $this->id;
+        $this->query = "SELECT nombre FROM habilidades WHERE id IN (SELECT idHabilidad FROM superheroes_habilidades WHERE idSuperheroe = :id)";
+        $this->parametros['id'] = $id;
+        $this->get_results_from_query();
+        $this->mensaje = 'Habilidades obtenidas correctamente';
+        return $this->rows;
     }
 }

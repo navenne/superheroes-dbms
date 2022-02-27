@@ -1,8 +1,16 @@
 <?php
-foreach ($data as $key => $value) { ?>
-    <p><?=$value['nombre'];?>
-    <a href='./superheroes/del/<?=$value['id']?>'><span class='material-icons'>delete</span></a>
-    <a href='./superheroes/edit/<?=$value['id']?>&nombre=<?=$value['nombre']?>'><span class='material-icons'>edit</span></a>
+foreach ($data['superheroes'] as $superheroe) { ?>
+    <p>
+        <?= $superheroe['nombre']; ?> |
+        <?php
+        foreach ($data['habilidades'] as $habilidades) {
+            foreach ($habilidades as $habilidad) {
+                    echo $habilidad['nombre'] . "  ";
+            }
+        }
+        ?>
+        <a href='./superheroes/del/<?= $superheroe['id'] ?>'><span class='material-icons'>delete</span></a>
+        <a href='./superheroes/edit/<?= $superheroe['id'] ?>&nombre=<?= $superheroe['nombre'] ?>'><span class='material-icons'>edit</span></a>
     </p>
 <?php
 }

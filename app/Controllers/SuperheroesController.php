@@ -15,7 +15,7 @@ class SuperheroesController extends BaseController
     public function addAction()
     {
         $data = array();
-        $nombre = $data['nombreErr'] = $velocidad = $data['velocidadErr'] = "";
+        $nombre = $data['nombreErr'] = $imagen = $data['imagenErr'] = "";
         $processform = false;
 
         if (isset($_POST["submit"])) {
@@ -27,17 +27,17 @@ class SuperheroesController extends BaseController
                 $nombre = stripslashes(htmlspecialchars(trim($_POST["nombre"])));
             }
 
-            if (empty($_POST["velocidad"])) {
-                $data['velocidadErr'] = "La velocidad es obligatoria";
+            if (empty($_POST["imagen"])) {
+                $data['imagenErr'] = "La imagen es obligatoria";
                 $processform = false;
             } else {
-                $velocidad = stripslashes(htmlspecialchars(trim($_POST["velocidad"])));
+                $imagen = stripslashes(htmlspecialchars(trim($_POST["imagen"])));
             }
 
             if ($processform) {
                 $sh = Superheroe::getInstancia();
                 $sh->setNombre($nombre);
-                $sh->setVelocidad($velocidad);
+                $sh->setImagen($imagen);
                 $sh->set();
                 echo $sh->getMensaje();
                 echo "<br><a href='/'>Volver a inicio</a><br>";
@@ -55,8 +55,8 @@ class SuperheroesController extends BaseController
         $data = array();
         $id = $data['id'] = strstr(explode("/", $_SERVER["REQUEST_URI"])[3], '&', true);
         $data['nombre'] = str_replace('%20', ' ', strstr(explode("=", $_SERVER["REQUEST_URI"])[1], '&', true));
-        $data['velocidad'] = explode("=", $_SERVER["REQUEST_URI"])[2];
-        $nombre = $data['nombreErr'] = $velocidad = $data['velocidadErr'] = "";
+        $data['imagen'] = explode("=", $_SERVER["REQUEST_URI"])[2];
+        $nombre = $data['nombreErr'] = $imagen = $data['imagenErr'] = "";
         $processform = false;
 
         if (isset($_POST["submit"])) {
@@ -68,18 +68,18 @@ class SuperheroesController extends BaseController
                 $nombre = stripslashes(htmlspecialchars(trim($_POST["nombre"])));
             }
 
-            if (empty($_POST["velocidad"])) {
-                $data['velocidadErr'] = "La velocidad es obligatoria";
+            if (empty($_POST["imagen"])) {
+                $data['imagenErr'] = "La imagen es obligatoria";
                 $processform = false;
             } else {
-                $velocidad = stripslashes(htmlspecialchars(trim($_POST["velocidad"])));
+                $imagen = stripslashes(htmlspecialchars(trim($_POST["imagen"])));
             }
 
             if ($processform) {
                 $sh = Superheroe::getInstancia();
                 $sh->setId($id);
                 $sh->setNombre($nombre);
-                $sh->setVelocidad($velocidad);
+                $sh->setImagen($imagen);
                 $sh->edit();
                 echo $sh->getMensaje();
                 echo "<br><a href='/'>Volver a inicio</a><br>";
@@ -106,7 +106,13 @@ class SuperheroesController extends BaseController
     public function listAction()
     {
         $sh = Superheroe::getInstancia();
-        $data = $sh->getAll();
+        $data = array();
+        $data['superheroes'] = $sh->getAll();
+        $data['habilidades'] = array();
+        foreach ($data['superheroes'] as $key => $superheroe) {
+            $sh->setId($superheroe['id']);
+            array_push($data['habilidades'], $sh->getHabilidades());
+        }
 
         if (isset($_POST["buscarId"])) {
             $processform = true;
@@ -119,7 +125,9 @@ class SuperheroesController extends BaseController
             if ($processform) {
                 $sh = Superheroe::getInstancia();
                 $sh->setId($id);
-                $data = $sh->get();
+                $data = array();
+                $data['superheroe'] = $sh->get();
+                $data['habilidades'] = $sh->getHabilidades();
                 $this->renderHTML('..\views\superheroes_get_view.php', $data);
             } else {
                 $this->renderHTML('..\views\superheroes_list_view.php', $data);
@@ -135,7 +143,10 @@ class SuperheroesController extends BaseController
             if ($processform) {
                 $sh = Superheroe::getInstancia();
                 $sh->setNombre($nombre);
-                $data = $sh->search();
+                $data = array();
+                $data['superheroe'] = $sh->search();
+                $sh->setId($data['superheroe']['id']);
+                $data['habilidades'] = $sh->getHabilidades();
                 $this->renderHTML('..\views\superheroes_get_view.php', $data);
             } else {
                 $this->renderHTML('..\views\superheroes_list_view.php', $data);
