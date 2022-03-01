@@ -15,7 +15,7 @@ class AuthController extends BaseController
     public function registerAction()
     {
         $data = array();
-        $usuario = $data['usuarioErr'] = $psw = $data['pswErr'] = $data['reppswErr'] = "";
+        $usuario = $data['usuarioErr'] = $psw = $data['pswErr'] = $data['reppswErr'] = $data['nombreErr'] = $data['emailErr'] = "";
         $processform = false;
 
         if (isset($_POST["submit"])) {
@@ -39,7 +39,14 @@ class AuthController extends BaseController
                 $data['usuarioErr'] = "Obligatorio de 3 a 15 caracteres. Solo permitido: letras, números y guion bajo _";
                 $processform = false;
             } else {
-                $usuario = $_POST["usuario"];
+                $us = Usuario::getInstancia();
+                $us->setUsuario($_POST['usuario']);
+                if ($us->search() != null) {
+                    $data['usuarioErr'] = "Ya existe ese usuario";
+                    $processform = false;
+                } else {
+                    $usuario = $_POST["usuario"];
+                }
             }
 
             if ($_POST["psw"] != $_POST["reppsw"]) {
@@ -54,7 +61,7 @@ class AuthController extends BaseController
             } else {
                 $psw = password_hash($_POST["psw"], PASSWORD_DEFAULT);
             }
-            
+
             if ($processform) {
                 $us = Usuario::getInstancia();
                 $us->setUsuario($usuario);
@@ -67,12 +74,51 @@ class AuthController extends BaseController
                 $ci->setIdUsuario($us->lastInsert());
                 $ci->set();
 
-                $this->renderHTML('..\views\superheroes_view.php');
+                header('Location: /login');
             } else {
-               $this->renderHTML('..\views\registro_view.php');
+                $this->renderHTML('..\views\registro_view.php', $data);
             }
         } else {
-            $this->renderHTML('..\views\registro_view.php');
+            $this->renderHTML('..\views\registro_view.php', $data);
         }
+    }
+
+    public function loginAction()
+    {
+        $data = array();
+        $data['usuarioErr'] = $data['pswErr'] = "";
+        $processform = false;
+
+        if (isset($_POST["submit"])) {
+            $processform = true;
+            $us = Usuario::getInstancia();
+
+            if (password_verify($_POST["psw"], $us->getPsw())) {
+                $data['pswErr'] = "Contraseña incorrecta";
+                $processform = false;
+            } else {
+                $us->setUsuario($_POST['usuario']);
+                $id = $us->search()['id'];
+                $us->setId($id);
+                $_SESSION['usuario']['perfil'] = $us->getPerfil();
+            }
+
+            if ($processform) {
+                header('Location: /');
+            } else {
+                $this->renderHTML('..\views\login_view.php', $data);
+            }
+        } else {
+            $this->renderHTML('..\views\login_view.php', $data);
+        }
+    }
+
+    public function logoutAction()
+    {
+        if (isset($_SESSION['usuario'])) {
+            unset($_SESSION['usuario']);
+        }
+        
+        header('Location: /');
     }
 }

@@ -16,11 +16,21 @@
         <div>
             <div class="options">
                 <a href="/superheroes/list">Listar</a>
-                <a href="/superheroes/add">Crear</a>
+                <?php if ($_SESSION['usuario']["perfil"] == "Experto") { ?>
+                    <a href="/superheroes/add">Crear</a>
+                <?php } ?>
             </div>
             <div>
-                <a href="/register" class="registro">Registro</a>
-                <a href="/login" class="login">Iniciar Sesión</a>
+                <?php
+                if ($_SESSION['usuario']["perfil"] == "invitado") { ?>
+                    <a href="/register" class="button">Registro</a>
+                    <a href="/login" class="button">Iniciar Sesión</a>
+                <?php
+                } else { ?>
+                    <a href="/logout" class="button">Logout</a>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </header>

@@ -40,6 +40,10 @@ form {
     justify-content: space-between;
 }
 
+.error {
+    color: red;
+}
+
 table {
     width: 100%;
     text-align: center;
@@ -49,12 +53,17 @@ table {
 }
 
 table td, table th {
-    border-bottom: 1px solid black;
+    border: 1px solid black;
     border-collapse: collapse;
 }
 
 ul {
     list-style-type: none;
+}
+
+td ul {
+    text-align: left;
+    text-transform: capitalize;
 }
 
 a {
@@ -63,7 +72,7 @@ a {
     padding: 10px;
 }
 
-.registro, .login {
+.button {
     background-color: white;
     padding: 10px;
 }

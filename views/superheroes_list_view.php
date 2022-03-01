@@ -17,7 +17,9 @@
             <th>Nombre</th>
             <th>Evolución</th>
             <th>Habilidades</th>
+            <?php if ($_SESSION['usuario']["perfil"] == "Experto") { ?>
             <th>Acciones</th>
+            <?php } ?>
         </tr>
     </thead>
     <tbody>
@@ -37,18 +39,20 @@
                     <?= $superheroe['evolucion']; ?>
                 </td>
                 <td>
+                    <ul>
                     <?php
-                    foreach ($data['habilidades'] as $habilidades) {
-                        foreach ($habilidades as $habilidad) {
-                            echo $habilidad['nombre'] . "  ";
-                        }
-                    }
+                    foreach ($superheroe['habilidades'] as $habilidad) { ?>
+                        <li><?=$habilidad['nombre']?></li>
+                    <?php }
                     ?>
+                    </ul>
                 </td>
+                <?php if ($_SESSION['usuario']["perfil"] == "Experto") { ?>
                 <td>
                     <a href='../del/<?= $superheroe['id'] ?>'><span class='material-icons'>delete</span></a>
                     <a href='../edit/<?= $superheroe['id'] ?>&nombre=<?= $superheroe['nombre'] ?>'><span class='material-icons'>edit</span></a>
                 </td>
+                <?php } ?>
             </tr>
         <?php
         }

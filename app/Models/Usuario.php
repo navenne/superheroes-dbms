@@ -38,6 +38,11 @@ class Usuario extends DBAbstractModel
         return $this->id;
     }
 
+    public function getPsw()
+    {
+        return $this->psw;
+    }
+
     public function setId($id)
     {
         $this->id = $id;
@@ -109,12 +114,36 @@ class Usuario extends DBAbstractModel
         $this->get_results_from_query();
         $this->mensaje = 'Usuario borrado correctamente';
     }
-    
+
     public function getLast($cantidad)
     {
         $this->query = "SELECT * FROM usuarios ORDER BY id DESC LIMIT $cantidad";
         $this->get_results_from_query();
         $this->mensaje = 'Usuarios obtenidos correctamente';
         return $this->rows;
+    }
+
+    public function search()
+    {
+        $usuario = $this->usuario;
+        $this->query = "SELECT * FROM usuarios WHERE usuario LIKE '%$usuario%'";
+        $this->parametros['usuario'] = $usuario;
+        $this->get_results_from_query();
+        $this->mensaje = 'Usuario obtenido correctamente';
+        return $this->rows[0];
+    }
+
+    public function getPerfil()
+    {
+        $id = $this->id;
+        $this->query = "SELECT * FROM superheroes WHERE idUsuario = :id";
+        $this->parametros['id'] = $id;
+        $this->get_results_from_query();
+        $superheroe = $this->rows[0];
+        if ($superheroe != null) {
+            return $superheroe['evolucion'];
+        } else {
+            return 'ciudadano';
+        }
     }
 }

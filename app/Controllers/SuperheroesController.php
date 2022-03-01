@@ -108,10 +108,9 @@ class SuperheroesController extends BaseController
         $sh = Superheroe::getInstancia();
         $data = array();
         $data['superheroes'] = $sh->getAll();
-        $data['habilidades'] = array();
         foreach ($data['superheroes'] as $key => $superheroe) {
             $sh->setId($superheroe['id']);
-            array_push($data['habilidades'], $sh->getHabilidades());
+            $data['superheroes'][$key]['habilidades'] = $sh->getHabilidades();
         }
 
         if (isset($_POST["buscarId"])) {
@@ -127,7 +126,7 @@ class SuperheroesController extends BaseController
                 $sh->setId($id);
                 $data = array();
                 $data['superheroe'] = $sh->get();
-                $data['habilidades'] = $sh->getHabilidades();
+                $data['superheroe']['habilidades'] = $sh->getHabilidades();
                 $this->renderHTML('..\views\superheroes_get_view.php', $data);
             } else {
                 $this->renderHTML('..\views\superheroes_list_view.php', $data);
@@ -146,7 +145,7 @@ class SuperheroesController extends BaseController
                 $data = array();
                 $data['superheroe'] = $sh->search();
                 $sh->setId($data['superheroe']['id']);
-                $data['habilidades'] = $sh->getHabilidades();
+                $data['superheroe']['habilidades'] = $sh->getHabilidades();
                 $this->renderHTML('..\views\superheroes_get_view.php', $data);
             } else {
                 $this->renderHTML('..\views\superheroes_list_view.php', $data);

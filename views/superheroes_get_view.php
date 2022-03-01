@@ -4,12 +4,13 @@
 
 <ul>
     <li>Id: <?= $data['superheroe']['id'] ?></li>
-    <li>Evolución: <?= $data['superheroe']['evolucion']?></li>
+    <li>Evolución: <?= $data['superheroe']['evolucion'] ?></li>
     <li>Habilidades:
         <ul>
             <?php
-            foreach ($data['habilidades'] as $habilidad) { ?>
-                <li><?=$habilidad['nombre']?><li>
+            foreach ($data['superheroe']['habilidades'] as $habilidad) { ?>
+                <li><?= $habilidad['nombre'] ?>
+                <li>
                 <?php
             }
                 ?>
@@ -17,7 +18,9 @@
     </li>
 </ul>
 
-<p>
-    <a href='./del/<?= $data['superheroe']['id'] ?>'>Delete<span class='material-icons'>delete</span></a>
-    <a href='./edit/<?= $data['superheroe']['id'] ?>&nombre=<?= $data['superheroe']['nombre'] ?>'>Edit<span class='material-icons'>edit</span></a>
-</p>
+<?php if ($_SESSION['usuario']["perfil"] == "Experto") { ?>
+    <p>
+        <a href='./del/<?= $data['superheroe']['id'] ?>'>Delete<span class='material-icons'>delete</span></a>
+        <a href='./edit/<?= $data['superheroe']['id'] ?>&nombre=<?= $data['superheroe']['nombre'] ?>'>Edit<span class='material-icons'>edit</span></a>
+    </p>
+<?php } ?>

@@ -16,10 +16,9 @@ class IndexController extends BaseController
         $sh = Superheroe::getInstancia();
         $data = array();
         $data['superheroes'] = $sh->getLast(15);
-        $data['habilidades'] = array();
         foreach ($data['superheroes'] as $key => $superheroe) {
             $sh->setId($superheroe['id']);
-            array_push($data['habilidades'], $sh->getHabilidades());
+            $data['superheroes'][$key]['habilidades'] = $sh->getHabilidades();
         }
         $this->renderHTML('..\views\superheroes_view.php', $data);
     }
