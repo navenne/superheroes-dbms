@@ -42,7 +42,7 @@
                     <ul>
                     <?php
                     foreach ($superheroe['habilidades'] as $habilidad) { ?>
-                        <li><?=$habilidad['nombre']?></li>
+                        <li><?=$habilidad['nombre']?>: <?=$habilidad['valor']?></li>
                     <?php }
                     ?>
                     </ul>

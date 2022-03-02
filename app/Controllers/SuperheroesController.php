@@ -8,6 +8,7 @@
 namespace App\Controllers;
 
 use App\Models\Superheroe;
+use App\Models\Habilidad;
 
 class SuperheroesController extends BaseController
 {
@@ -106,11 +107,16 @@ class SuperheroesController extends BaseController
     public function listAction()
     {
         $sh = Superheroe::getInstancia();
+        $hb = Habilidad::getInstancia();
         $data = array();
         $data['superheroes'] = $sh->getAll();
         foreach ($data['superheroes'] as $key => $superheroe) {
             $sh->setId($superheroe['id']);
             $data['superheroes'][$key]['habilidades'] = $sh->getHabilidades();
+            foreach ($data['superheroes'][$key]['habilidades'] as $clave => $habilidad) {
+                $hb->setId($habilidad['idHabilidad']);
+                $data['superheroes'][$key]['habilidades'][$clave]['nombre'] = $hb->get()['nombre'];
+            }
         }
 
         if (isset($_POST["buscarId"])) {
@@ -127,6 +133,10 @@ class SuperheroesController extends BaseController
                 $data = array();
                 $data['superheroe'] = $sh->get();
                 $data['superheroe']['habilidades'] = $sh->getHabilidades();
+                foreach ($data['superheroe']['habilidades'] as $clave => $habilidad) {
+                    $hb->setId($habilidad['idHabilidad']);
+                    $data['superheroe']['habilidades'][$clave]['nombre'] = $hb->get()['nombre'];
+                }
                 $this->renderHTML('..\views\superheroes_get_view.php', $data);
             } else {
                 $this->renderHTML('..\views\superheroes_list_view.php', $data);

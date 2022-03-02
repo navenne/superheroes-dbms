@@ -146,7 +146,7 @@ class Superheroe extends DBAbstractModel
     public function getHabilidades()
     {
         $id = $this->id;
-        $this->query = "SELECT nombre FROM habilidades WHERE id IN (SELECT idHabilidad FROM superheroes_habilidades WHERE idSuperheroe = :id)";
+        $this->query = "SELECT idHabilidad, valor FROM superheroes_habilidades WHERE idSuperheroe = :id";
         $this->parametros['id'] = $id;
         $this->get_results_from_query();
         $this->mensaje = 'Habilidades obtenidas correctamente';

@@ -9,11 +9,9 @@
         <ul>
             <?php
             foreach ($data['superheroe']['habilidades'] as $habilidad) { ?>
-                <li><?= $habilidad['nombre'] ?>
-                <li>
-                <?php
-            }
-                ?>
+                <li><?= $habilidad['nombre'] ?>: <?= $habilidad['valor'] ?></li>
+            <?php }
+            ?>
         </ul>
     </li>
 </ul>
