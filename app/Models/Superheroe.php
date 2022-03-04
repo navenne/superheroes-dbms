@@ -152,4 +152,17 @@ class Superheroe extends DBAbstractModel
         $this->mensaje = 'Habilidades obtenidas correctamente';
         return $this->rows;
     }
+
+    public function setHabilidades($habilidades)
+    {
+        $id = $this->id;
+        foreach ($habilidades as $idHabilidad => $valor) {
+            $this->query = "INSERT INTO superheroes_habilidades(idSuperheroe, idHabilidad, valor) VALUES(:id, :idHabilidad, :valor)";
+            $this->parametros['id'] = $id;
+            $this->parametros['idHabilidad'] = $idHabilidad;
+            $this->parametros['valor'] = $valor;
+            $this->get_results_from_query();
+        }
+        $this->mensaje = 'Habilidades insertadas correctamente';
+    }
 }

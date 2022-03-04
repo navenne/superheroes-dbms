@@ -1,6 +1,6 @@
 <h2><?= $data['superheroe']['nombre'] ?></h2>
 
-<?= $data['superheroe']['imagen'] ?>
+<img src="<?= "upload/" . $data['superheroe']['imagen']; ?>">
 
 <ul>
     <li>Id: <?= $data['superheroe']['id'] ?></li>

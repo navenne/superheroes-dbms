@@ -80,3 +80,7 @@ a {
 .registro:hover, .login:hover {
     background-color: wheat;
 }
+
+img {
+    height: 64px;
+}

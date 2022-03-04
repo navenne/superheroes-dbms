@@ -130,7 +130,7 @@ class Usuario extends DBAbstractModel
         $this->parametros['usuario'] = $usuario;
         $this->get_results_from_query();
         $this->mensaje = 'Usuario obtenido correctamente';
-        return $this->rows[0];
+        return $this->rows[0] ?? "";
     }
 
     public function getPerfil()
