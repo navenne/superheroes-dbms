@@ -66,8 +66,19 @@ class PeticionesController extends BaseController
         foreach ($data['peticiones'] as $key => $peticion) {
             $pt->setId($peticion['id']);
             $sh->setId($peticion['idSuperheroe']);
-            $data['peticiones'][$key]['superheroe'] = $sh->getNombre();
+            $data['peticiones'][$key]['superheroe'] = $sh->get()['nombre'];
         }
         $this->renderHTML('..\views\peticiones_list_view.php', $data);
+    }
+
+    public function delAction()
+    {
+        $id = explode("/", $_SERVER["REQUEST_URI"])[3];
+        $pt = Peticion::getInstancia();
+        $pt->setId($id);
+        $pt->delete();
+        echo $pt->getMensaje();
+        echo "<br><a href='/'>Volver a inicio</a><br>";
+        echo "<a href='../list'>Ver todos</a>";
     }
 }

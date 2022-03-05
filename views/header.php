@@ -15,9 +15,12 @@
         <h1><a href="/">Superheroes</a></h1>
         <div>
             <div class="options">
-                <a href="/superheroes/list">Listar</a>
+                <a href="/superheroes/list">Listar Superheroes</a>
+                <?php if ($_SESSION['usuario']["perfil"] == "ciudadano") { ?>
+                    <a href="/peticiones/list">Mis Peticiones</a>
+                <?php } ?>
                 <?php if ($_SESSION['usuario']["perfil"] == "Experto") { ?>
-                    <a href="/superheroes/add">Crear</a>
+                    <a href="/superheroes/add">Crear Superheroes</a>
                 <?php } ?>
             </div>
             <div>

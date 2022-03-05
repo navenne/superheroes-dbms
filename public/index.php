@@ -71,6 +71,16 @@ if ($_SESSION['usuario']['perfil'] == 'ciudadano') {
         'path' => '/^\/peticiones\/add\/[1-9][0-9]*$/',
         'action' => [PeticionesController::class, 'addAction']
     ));
+    $router->add(array(
+        'name' => 'pt_list',
+        'path' => '/^\/peticiones\/list$/',
+        'action' => [PeticionesController::class, 'listAction']
+    ));
+    $router->add(array(
+        'name' => 'pt_del',
+        'path' => '/^\/peticiones\/del\/[1-9][0-9]*$/',
+        'action' => [PeticionesController::class, 'delAction']
+    ));
 }
 
 $router->add(array(

@@ -31,7 +31,7 @@
                 <?php 
                 if ($_SESSION['usuario']["perfil"] == "ciudadano") { ?>
                     <td>
-                        <a href='../del/<?= $peticion['id'] ?>'><span class='material-icons'>delete</span></a>
+                        <a href='del/<?= $peticion['id'] ?>'><span class='material-icons'>delete</span></a>
                     </td>
                 <?php } ?>
             </tr>
