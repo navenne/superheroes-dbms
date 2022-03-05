@@ -60,6 +60,16 @@ class Superheroe extends DBAbstractModel
         $this->idUsuario = $idUsuario;
     }
 
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
     public function getMensaje()
     {
         return $this->mensaje;
@@ -158,6 +168,19 @@ class Superheroe extends DBAbstractModel
         $id = $this->id;
         foreach ($habilidades as $idHabilidad => $valor) {
             $this->query = "INSERT INTO superheroes_habilidades(idSuperheroe, idHabilidad, valor) VALUES(:id, :idHabilidad, :valor)";
+            $this->parametros['id'] = $id;
+            $this->parametros['idHabilidad'] = $idHabilidad;
+            $this->parametros['valor'] = $valor;
+            $this->get_results_from_query();
+        }
+        $this->mensaje = 'Habilidades insertadas correctamente';
+    }
+
+    public function updateHabilidades($habilidades)
+    {
+        $id = $this->id;
+        foreach ($habilidades as $idHabilidad => $valor) {
+            $this->query = "UPDATE superheroes_habilidades SET valor = :valor WHERE idSuperheroe = :id AND idHabilidad = :idHabilidad";
             $this->parametros['id'] = $id;
             $this->parametros['idHabilidad'] = $idHabilidad;
             $this->parametros['valor'] = $valor;

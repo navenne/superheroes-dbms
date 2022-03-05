@@ -30,7 +30,7 @@
                     <?= $superheroe['id']; ?>
                 </td>
                 <td>
-                    <img src="<?= "upload/" . $superheroe['imagen']; ?>">
+                    <img src="<?= "/upload/" . $superheroe['imagen']; ?>">
                 </td>
                 <td>
                     <?= $superheroe['nombre']; ?>

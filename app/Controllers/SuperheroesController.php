@@ -134,10 +134,16 @@ class SuperheroesController extends BaseController
     public function editAction()
     {
         $data = array();
-        $id = $data['id'] = strstr(explode("/", $_SERVER["REQUEST_URI"])[3], '&', true);
-        $data['nombre'] = str_replace('%20', ' ', strstr(explode("=", $_SERVER["REQUEST_URI"])[1], '&', true));
-        $data['imagen'] = explode("=", $_SERVER["REQUEST_URI"])[2];
-        $nombre = $data['nombreErr'] = $imagen = $data['imagenErr'] = "";
+        $id = $data['id'] = explode("/", $_SERVER["REQUEST_URI"])[3];
+        $sh = Superheroe::getInstancia();
+        $sh->setId($id);
+        $data['sh_habilidades'] = $sh->getHabilidades();
+        $data['nombre'] = $sh->get()['nombre'];
+        $imagen = $sh->get()['imagen'];
+        $idUsuario = $sh->get()['idUsuario'];
+        $nombre = $data['nombreErr'] = $data['imagenErr'] = $data['habilidadesErr'] = "";
+        $hb = Habilidad::getInstancia();
+        $data['habilidades'] = $hb->getAll();
         $processform = false;
 
         if (isset($_POST["submit"])) {
@@ -149,19 +155,57 @@ class SuperheroesController extends BaseController
                 $nombre = stripslashes(htmlspecialchars(trim($_POST["nombre"])));
             }
 
-            if (empty($_POST["imagen"])) {
-                $data['imagenErr'] = "La imagen es obligatoria";
-                $processform = false;
-            } else {
-                $imagen = stripslashes(htmlspecialchars(trim($_POST["imagen"])));
+            if (isset($_FILES['imagen_edit'])) {
+                define("DIRUPLOAD", 'upload/');
+                define("MAXSIZE", 20000000000);
+
+                $allowedExts = array("gif", "jpeg", "jpg", "png", "PNG");
+                $allowedFormat = array("image/gif", "image/jpeg", "image/jpg", "image/jpeg", "image/x-png", "image/png", "image/PNG");
+
+                $temp = explode(".", $_FILES["imagen_edit"]["name"]);
+                $extension = end($temp);
+
+                if (($_FILES["imagen_edit"]["size"] < MAXSIZE) &&
+                    in_array($_FILES["imagen_edit"]["type"], $allowedFormat)  &&
+                    in_array($extension, $allowedExts)
+                ) {
+                    if ($_FILES["imagen_edit"]["error"] > 0) {
+                        $data['imagenErr'] = "Error: " . $_FILES["imagen_edit"]["error"];
+                        $processform = false;
+                    } else {
+                        $filename = $_FILES["imagen_edit"]["name"];
+                        $imagen = uniqid() . '.' . pathinfo($filename, PATHINFO_EXTENSION);
+                        move_uploaded_file($_FILES["imagen_edit"]["tmp_name"], DIRUPLOAD . $imagen);
+                    }
+                }
+            }
+
+            foreach ($data['habilidades'] as $key => $habilidad) {
+                $id = $habilidad['id'];
+                if (isset($_POST["$id"]) && empty($_POST["valor$id"])) {
+                    $data['habilidadesErr'] = "Por favor introduce un valor para cada habilidad seleccionada";
+                    $processform = false;
+                }
             }
 
             if ($processform) {
                 $sh = Superheroe::getInstancia();
-                $sh->setId($id);
+                $sh->setId($data['id']);
                 $sh->setNombre($nombre);
                 $sh->setImagen($imagen);
+                $sh->setEvolucion('principiante');
+                $sh->setIdUsuario($idUsuario);
+                $habilidades = array();
+                foreach ($data['habilidades'] as $habilidad) {
+                    $id = $habilidad['id'];
+                    if (isset($_POST["$id"])) {
+                        $habilidades[$id] = $_POST["valor$id"];
+                    }
+                }
+                $sh->updateHabilidades($habilidades);
                 $sh->edit();
+
+
                 echo $sh->getMensaje();
                 echo "<br><a href='/'>Volver a inicio</a><br>";
                 echo "<a href='../list'>Ver todos</a>";

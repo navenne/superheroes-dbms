@@ -39,7 +39,7 @@
                 <?php if ($_SESSION['usuario']["perfil"] == "Experto") { ?>
                     <td>
                         <a href='./superheroes/del/<?= $superheroe['id'] ?>'><span class='material-icons'>delete</span></a>
-                        <a href='./superheroes/edit/<?= $superheroe['id'] ?>&nombre=<?= $superheroe['nombre'] ?>'><span class='material-icons'>edit</span></a>
+                        <a href='./superheroes/edit/<?= $superheroe['id'] ?>'><span class='material-icons'>edit</span></a>
                     </td>
                 <?php } ?>
             </tr>
