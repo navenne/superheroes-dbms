@@ -188,4 +188,24 @@ class Superheroe extends DBAbstractModel
         }
         $this->mensaje = 'Habilidades insertadas correctamente';
     }
+
+    public function getPeticiones()
+    {
+        $id = $this->id;
+        $this->query = "SELECT * FROM peticiones WHERE idSuperheroe = :id";
+        $this->parametros['id'] = $id;
+        $this->get_results_from_query();
+        $this->mensaje = 'Peticiones listadas correctamente';
+        return $this->rows;
+    }
+
+    public function getByIdUsuario()
+    {
+        $idUsuario = $this->idUsuario;
+        $this->query = "SELECT * FROM superheroes WHERE idUsuario = :idUsuario";
+        $this->parametros['idUsuario'] = $idUsuario;
+        $this->get_results_from_query();
+        $this->mensaje = 'Superhéroe obtenido correctamente';
+        return $this->rows[0];
+    }
 }

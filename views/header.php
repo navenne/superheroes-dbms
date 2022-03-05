@@ -21,6 +21,10 @@
                 <?php } ?>
                 <?php if ($_SESSION['usuario']["perfil"] == "Experto") { ?>
                     <a href="/superheroes/add">Crear Superheroes</a>
+                    <a href="/peticiones/superheroes/list">Mis peticiones</a>
+                <?php }
+                if ($_SESSION['usuario']["perfil"] == "Principiante") { ?>
+                    <a href="/peticiones/superheroes/list">Mis peticiones</a>
                 <?php } ?>
             </div>
             <div>

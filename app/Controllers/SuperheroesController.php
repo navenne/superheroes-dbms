@@ -10,7 +10,7 @@ namespace App\Controllers;
 use App\Models\Superheroe;
 use App\Models\Habilidad;
 use App\Models\Usuario;
-use \Ds\Map;
+use App\Models\Peticion;
 
 class SuperheroesController extends BaseController
 {
@@ -108,7 +108,7 @@ class SuperheroesController extends BaseController
                 $sh = Superheroe::getInstancia();
                 $sh->setNombre($nombre);
                 $sh->setImagen($imagen);
-                $sh->setEvolucion('principiante');
+                $sh->setEvolucion('Principiante');
                 $sh->setIdUsuario($idUsuario);
                 $sh->set();
 
@@ -193,7 +193,7 @@ class SuperheroesController extends BaseController
                 $sh->setId($data['id']);
                 $sh->setNombre($nombre);
                 $sh->setImagen($imagen);
-                $sh->setEvolucion('principiante');
+                $sh->setEvolucion('Principiante');
                 $sh->setIdUsuario($idUsuario);
                 $habilidades = array();
                 foreach ($data['habilidades'] as $habilidad) {
@@ -288,4 +288,28 @@ class SuperheroesController extends BaseController
             $this->renderHTML('..\views\superheroes_list_view.php', $data);
         }
     }
+
+    public function petitionsListAction()
+    {
+        $pt = Peticion::getInstancia();
+        $sh = Superheroe::getInstancia();
+        $sh->setIdUsuario($_SESSION['usuario']['id']);
+        $id = $sh->getByIdUsuario()['id'];
+        $sh->setId($id);
+        $data = array();
+        $data['peticiones'] = $sh->getPeticiones();
+
+        if (isset($_POST["submit"])) {
+
+            $pt = Peticion::getInstancia();
+            foreach ($_POST['check'] as $key => $peticion) {
+                $pt->setId($peticion);
+                $pt->setRealizadaDb(true);
+            }
+                header('Location: /');
+        } else {
+            $this->renderHTML('..\views\peticiones_superheroes_list_view.php', $data);
+        }
+    }
+
 }

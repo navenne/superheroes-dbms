@@ -145,4 +145,15 @@ class Peticion extends DBAbstractModel
         $this->mensaje = 'Peticiones obtenidas correctamente';
         return $this->rows;
     }
+
+    public function setRealizadaDb($realizada)
+    {
+        $id = $this->id;
+        $this->query = "UPDATE peticiones SET realizada = :realizada WHERE id = :id";
+        $this->parametros['realizada'] = $realizada;
+        $this->parametros['id'] = $id;
+        $this->get_results_from_query();
+        $this->mensaje = 'Petición editada correctamente';
+    }
+
 }

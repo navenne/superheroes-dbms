@@ -63,6 +63,18 @@ if ($_SESSION['usuario']['perfil'] == 'Experto') {
         'path' => '/^\/superheroes\/del\/[1-9][0-9]*$/',
         'action' => [SuperheroesController::class, 'delAction']
     ));
+    $router->add(array(
+        'name' => 'sh_list_pt',
+        'path' => '/^\/peticiones\/superheroes\/list$/',
+        'action' => [SuperheroesController::class, 'petitionsListAction']
+    ));
+}
+if ($_SESSION['usuario']['perfil'] == 'Principiante') {
+    $router->add(array(
+        'name' => 'sh_list_pt',
+        'path' => '/^\/peticiones\/superheroes\/list$/',
+        'action' => [SuperheroesController::class, 'petitionsListAction']
+    ));
 }
 
 if ($_SESSION['usuario']['perfil'] == 'ciudadano') {
