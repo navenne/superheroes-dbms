@@ -12,6 +12,7 @@ use App\Core\Router;
 use App\Controllers\IndexController;
 use App\Controllers\AuthController;
 use App\Controllers\SuperheroesController;
+use App\Controllers\PeticionesController;
 
 session_start();
 if (!isset($_SESSION['usuario']['perfil'])) {
@@ -61,6 +62,14 @@ if ($_SESSION['usuario']['perfil'] == 'Experto') {
         'name' => 'sh_del',
         'path' => '/^\/superheroes\/del\/[1-9][0-9]*$/',
         'action' => [SuperheroesController::class, 'delAction']
+    ));
+}
+
+if ($_SESSION['usuario']['perfil'] == 'ciudadano') {
+    $router->add(array(
+        'name' => 'pt_add',
+        'path' => '/^\/peticiones\/add\/[1-9][0-9]*$/',
+        'action' => [PeticionesController::class, 'addAction']
     ));
 }
 

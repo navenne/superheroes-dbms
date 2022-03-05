@@ -6,7 +6,7 @@
             <th>Nombre</th>
             <th>Evolución</th>
             <th>Habilidades</th>
-            <?php if ($_SESSION['usuario']["perfil"] == "Experto") { ?>
+            <?php if ($_SESSION['usuario']["perfil"] == "Experto" || $_SESSION['usuario']["perfil"] == "ciudadano") { ?>
                 <th>Acciones</th>
             <?php } ?>
         </tr>
@@ -40,6 +40,11 @@
                     <td>
                         <a href='./superheroes/del/<?= $superheroe['id'] ?>'><span class='material-icons'>delete</span></a>
                         <a href='./superheroes/edit/<?= $superheroe['id'] ?>'><span class='material-icons'>edit</span></a>
+                    </td>
+                <?php }
+                if ($_SESSION['usuario']["perfil"] == "ciudadano") { ?>
+                    <td>
+                        <a href='./peticiones/add/<?= $superheroe['id'] ?>'><span class='material-icons'>add_circle</span></a>
                     </td>
                 <?php } ?>
             </tr>

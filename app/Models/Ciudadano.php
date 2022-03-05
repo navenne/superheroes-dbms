@@ -120,4 +120,14 @@ class Ciudadano extends DBAbstractModel
         $this->mensaje = 'Ciudadanos obtenidos correctamente';
         return $this->rows;
     }
+
+    public function getByIdUsuario()
+    {
+        $idUsuario = $this->idUsuario;
+        $this->query = "SELECT * FROM ciudadanos WHERE idUsuario = :idUsuario";
+        $this->parametros['idUsuario'] = $idUsuario;
+        $this->get_results_from_query();
+        $this->mensaje = 'Ciudadano obtenido correctamente';
+        return $this->rows[0];
+    }
 }

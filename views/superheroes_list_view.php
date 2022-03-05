@@ -52,6 +52,11 @@
                     <a href='../del/<?= $superheroe['id'] ?>'><span class='material-icons'>delete</span></a>
                     <a href='../edit/<?= $superheroe['id'] ?>&nombre=<?= $superheroe['nombre'] ?>'><span class='material-icons'>edit</span></a>
                 </td>
+                <?php }
+                if ($_SESSION['usuario']["perfil"] == "ciudadano") { ?>
+                    <td>
+                        <a href='./peticiones/add/<?= $superheroe['id'] ?>'><span class='material-icons'>add_circle</span></a>
+                    </td>
                 <?php } ?>
             </tr>
         <?php

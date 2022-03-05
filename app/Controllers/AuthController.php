@@ -92,15 +92,15 @@ class AuthController extends BaseController
         if (isset($_POST["submit"])) {
             $processform = true;
             $us = Usuario::getInstancia();
-
-            if (password_verify($_POST["psw"], $us->getPsw())) {
+            $us->setUsuario($_POST['usuario']);
+            $id = $us->search()['id'];
+            $us->setId($id);
+            if (!password_verify($_POST["psw"], $us->get()['psw'])) {
                 $data['pswErr'] = "Contraseña incorrecta";
                 $processform = false;
             } else {
-                $us->setUsuario($_POST['usuario']);
-                $id = $us->search()['id'];
-                $us->setId($id);
                 $_SESSION['usuario']['perfil'] = $us->getPerfil();
+                $_SESSION['usuario']['id'] = $id;
             }
 
             if ($processform) {

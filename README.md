@@ -13,6 +13,8 @@ Añadir a _RUTA\httpd-vhosts.conf_
             Require all granted
         </Directory>
     </VirtualHost>
-```
+```  
 Añadir a fichero hosts  
-127.0.0.1  superheroes.local
+127.0.0.1  superheroes.local  
+  
+Instalar dependencias con composer
