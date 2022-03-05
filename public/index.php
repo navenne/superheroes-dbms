@@ -47,7 +47,7 @@ if ($_SESSION['usuario']['perfil'] != 'invitado') {
     ));
 }
 
-if ($_SESSION['usuario']['perfil'] == 'Experto') {
+if ($_SESSION['usuario']['perfil'] == 'experto') {
     $router->add(array(
         'name' => 'sh_add',
         'path' => '/^\/superheroes\/add$/',
@@ -69,7 +69,7 @@ if ($_SESSION['usuario']['perfil'] == 'Experto') {
         'action' => [SuperheroesController::class, 'petitionsListAction']
     ));
 }
-if ($_SESSION['usuario']['perfil'] == 'Principiante') {
+if ($_SESSION['usuario']['perfil'] == 'principiante') {
     $router->add(array(
         'name' => 'sh_list_pt',
         'path' => '/^\/peticiones\/superheroes\/list$/',

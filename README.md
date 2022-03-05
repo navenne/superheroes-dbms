@@ -18,3 +18,6 @@ Añadir a fichero hosts
 127.0.0.1  superheroes.local  
   
 Instalar dependencias con composer
+
+### Base de datos de ejemplo
+[bd_superheroes.sql](https://github.com/navenne/superheroes-dbms/tree/main/public/bd_superheroes.sql)

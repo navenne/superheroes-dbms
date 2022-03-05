@@ -156,4 +156,14 @@ class Peticion extends DBAbstractModel
         $this->mensaje = 'Petición editada correctamente';
     }
 
+    public function getAllPeticionesCiudadano($idCiudadano)
+    {
+        $this->query = "SELECT * FROM peticiones WHERE idCiudadano = :idCiudadano";
+        $this->parametros['idCiudadano'] = $idCiudadano;
+        $this->get_results_from_query();
+        $this->mensaje = 'Peticiones listadas correctamente';
+        return $this->rows;
+    }
+    
+
 }

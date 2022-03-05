@@ -108,7 +108,7 @@ class SuperheroesController extends BaseController
                 $sh = Superheroe::getInstancia();
                 $sh->setNombre($nombre);
                 $sh->setImagen($imagen);
-                $sh->setEvolucion('Principiante');
+                $sh->setEvolucion('principiante');
                 $sh->setIdUsuario($idUsuario);
                 $sh->set();
 
@@ -193,7 +193,7 @@ class SuperheroesController extends BaseController
                 $sh->setId($data['id']);
                 $sh->setNombre($nombre);
                 $sh->setImagen($imagen);
-                $sh->setEvolucion('Principiante');
+                $sh->setEvolucion('principiante');
                 $sh->setIdUsuario($idUsuario);
                 $habilidades = array();
                 foreach ($data['habilidades'] as $habilidad) {

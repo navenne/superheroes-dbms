@@ -6,7 +6,7 @@
             <th>Nombre</th>
             <th>Evolución</th>
             <th>Habilidades</th>
-            <?php if ($_SESSION['usuario']["perfil"] == "Experto" || $_SESSION['usuario']["perfil"] == "ciudadano") { ?>
+            <?php if ($_SESSION['usuario']["perfil"] == "experto" || $_SESSION['usuario']["perfil"] == "ciudadano") { ?>
                 <th>Acciones</th>
             <?php } ?>
         </tr>
@@ -36,7 +36,7 @@
                         ?>
                     </ul>
                 </td>
-                <?php if ($_SESSION['usuario']["perfil"] == "Experto") { ?>
+                <?php if ($_SESSION['usuario']["perfil"] == "experto") { ?>
                     <td>
                         <a href='./superheroes/del/<?= $superheroe['id'] ?>'><span class='material-icons'>delete</span></a>
                         <a href='./superheroes/edit/<?= $superheroe['id'] ?>'><span class='material-icons'>edit</span></a>

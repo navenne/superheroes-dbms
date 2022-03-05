@@ -19,11 +19,11 @@
                 <?php if ($_SESSION['usuario']["perfil"] == "ciudadano") { ?>
                     <a href="/peticiones/list">Mis Peticiones</a>
                 <?php } ?>
-                <?php if ($_SESSION['usuario']["perfil"] == "Experto") { ?>
+                <?php if ($_SESSION['usuario']["perfil"] == "experto") { ?>
                     <a href="/superheroes/add">Crear Superheroes</a>
                     <a href="/peticiones/superheroes/list">Mis peticiones</a>
                 <?php }
-                if ($_SESSION['usuario']["perfil"] == "Principiante") { ?>
+                if ($_SESSION['usuario']["perfil"] == "principiante") { ?>
                     <a href="/peticiones/superheroes/list">Mis peticiones</a>
                 <?php } ?>
             </div>

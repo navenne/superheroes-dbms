@@ -61,8 +61,11 @@ class PeticionesController extends BaseController
     {
         $pt = Peticion::getInstancia();
         $sh = Superheroe::getInstancia();
+        $ci = Ciudadano::getInstancia();
+        $ci->setIdUsuario($_SESSION['usuario']['id']);
+        $idCiudadano = $ci->getByIdUsuario($_SESSION['usuario']['id'])['id'];
         $data = array();
-        $data['peticiones'] = $pt->getAll();
+        $data['peticiones'] = $pt->getAllPeticionesCiudadano($idCiudadano);
         foreach ($data['peticiones'] as $key => $peticion) {
             $pt->setId($peticion['id']);
             $sh->setId($peticion['idSuperheroe']);

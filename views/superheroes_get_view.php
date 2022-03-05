@@ -16,7 +16,7 @@
     </li>
 </ul>
 
-<?php if ($_SESSION['usuario']["perfil"] == "Experto") { ?>
+<?php if ($_SESSION['usuario']["perfil"] == "experto") { ?>
     <p>
         <a href='./del/<?= $data['superheroe']['id'] ?>'>Delete<span class='material-icons'>delete</span></a>
         <a href='./edit/<?= $data['superheroe']['id'] ?>'>Edit<span class='material-icons'>edit</span></a>
@@ -24,6 +24,6 @@
 <?php } 
 if ($_SESSION['usuario']["perfil"] == "ciudadano") { ?>
     <p>
-        <a href='./peticiones/add/<?= $superheroe['id'] ?>'><span class='material-icons'>add_circle</span></a>
+        <a href='../peticiones/add/<?= $data['superheroe']['id'] ?>'><span class='material-icons'>add_circle</span></a>
     </p>
 <?php } ?>

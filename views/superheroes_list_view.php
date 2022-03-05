@@ -17,7 +17,7 @@
             <th>Nombre</th>
             <th>Evolución</th>
             <th>Habilidades</th>
-            <?php if ($_SESSION['usuario']["perfil"] == "Experto") { ?>
+            <?php if ($_SESSION['usuario']["perfil"] == "experto") { ?>
             <th>Acciones</th>
             <?php } ?>
         </tr>
@@ -47,7 +47,7 @@
                     ?>
                     </ul>
                 </td>
-                <?php if ($_SESSION['usuario']["perfil"] == "Experto") { ?>
+                <?php if ($_SESSION['usuario']["perfil"] == "experto") { ?>
                 <td>
                     <a href='../del/<?= $superheroe['id'] ?>'><span class='material-icons'>delete</span></a>
                     <a href='../edit/<?= $superheroe['id'] ?>&nombre=<?= $superheroe['nombre'] ?>'><span class='material-icons'>edit</span></a>
@@ -55,7 +55,7 @@
                 <?php }
                 if ($_SESSION['usuario']["perfil"] == "ciudadano") { ?>
                     <td>
-                        <a href='./peticiones/add/<?= $superheroe['id'] ?>'><span class='material-icons'>add_circle</span></a>
+                        <a href='../peticiones/add/<?= $superheroe['id'] ?>'><span class='material-icons'>add_circle</span></a>
                     </td>
                 <?php } ?>
             </tr>
