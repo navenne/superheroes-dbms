@@ -20,4 +20,10 @@ Añadir a fichero hosts
 Instalar dependencias con composer
 
 ### Base de datos de ejemplo
-[bd_superheroes.sql](https://github.com/navenne/superheroes-dbms/tree/main/public/bd_superheroes.sql)
+[bd_superheroes.sql](https://github.com/navenne/superheroes-dbms/tree/main/public/bd_superheroes.sql)  
+  
+### Login de usuarios para la base de datos de ejemplo
+Superhéroe experto:  
+ - Usuario: admin
+ - Contraseña: Admin@123
+Todos los usuarios tienen el mismo formato de contraseña: Nombredeusuario@123
